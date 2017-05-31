@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>app</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >DESKTOP-FQI3R7C</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;app
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="app-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="app-module.html">Module app</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># *-* coding: utf-8 *-*</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># @version: Python 2.7</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">getopt</tt> <tt class="py-keyword">import</tt> <tt class="py-name">getopt</tt><tt class="py-op">,</tt> <tt class="py-name">GetoptError</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module binary=binary-module.html"><a title="binary" class="py-name" href="#" onclick="return doclink('link-0', 'binary', 'link-0');">binary</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="raw_compress"></a><div id="raw_compress-def"><a name="L8"></a><tt class="py-lineno">  8</tt> <a class="py-toggle" href="#" id="raw_compress-toggle" onclick="return toggle('raw_compress');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="app-module.html#raw_compress">raw_compress</a><tt class="py-op">(</tt><tt class="py-param">uncompressed</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="raw_compress-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="raw_compress-expanded"><a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">    @summary: Compress a string to a list of output symbols.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">    @param uncompressed: data not yet compressed</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">    @type uncompressed: str</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">    @return: hybrid list, elements of type int or str</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype: list</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    @note: First element is encoding size in bits</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-comment"># Build the dictionary.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-name">dict_size</tt> <tt class="py-op">=</tt> <tt class="py-number">256</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-name">dictionary</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">chr</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">chr</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrange</tt><tt class="py-op">(</tt><tt class="py-name">dict_size</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Function app.verboseprint()=app-module.html#verboseprint"><a title="app.verboseprint" class="py-name" href="#" onclick="return doclink('link-1', 'verboseprint', 'link-1');">verboseprint</a></tt><tt class="py-op">(</tt><tt class="py-string">"%d uncompressed chars"</tt> <tt class="py-op">%</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">uncompressed</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">uncompressed</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-name">wc</tt> <tt class="py-op">=</tt> <tt class="py-name">w</tt> <tt class="py-op">+</tt> <tt class="py-name">c</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">wc</tt> <tt class="py-keyword">in</tt> <tt class="py-name">dictionary</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">            <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-name">wc</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">            <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">dictionary</tt><tt class="py-op">[</tt><tt class="py-name">w</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">            <tt class="py-comment"># Add wc to the dictionary.</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">            <tt class="py-name">dictionary</tt><tt class="py-op">[</tt><tt class="py-name">wc</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">dict_size</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">            <tt class="py-name">dict_size</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">            <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-name">c</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-comment"># Output the code for w.</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">w</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">dictionary</tt><tt class="py-op">[</tt><tt class="py-name">w</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-comment"># Epilogue</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt id="link-2" class="py-name"><a title="app.verboseprint" class="py-name" href="#" onclick="return doclink('link-2', 'verboseprint', 'link-1');">verboseprint</a></tt><tt class="py-op">(</tt><tt class="py-string">"%d compressed elements"</tt> <tt class="py-op">%</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-name">ints</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">el</tt> <tt class="py-keyword">for</tt> <tt class="py-name">el</tt> <tt class="py-keyword">in</tt> <tt class="py-name">result</tt> <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">el</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt id="link-3" class="py-name"><a title="app.verboseprint" class="py-name" href="#" onclick="return doclink('link-3', 'verboseprint', 'link-1');">verboseprint</a></tt><tt class="py-op">(</tt><tt class="py-string">"Taille max : %d"</tt> <tt class="py-op">%</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">ints</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-name">bitlen</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">bin</tt><tt class="py-op">(</tt><tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">ints</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt id="link-4" class="py-name"><a title="app.verboseprint" class="py-name" href="#" onclick="return doclink('link-4', 'verboseprint', 'link-1');">verboseprint</a></tt><tt class="py-op">(</tt><tt class="py-string">"Encoding size = %d bits"</tt> <tt class="py-op">%</tt> <tt class="py-name">bitlen</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">insert</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">bitlen</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="raw_decompress"></a><div id="raw_decompress-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="raw_decompress-toggle" onclick="return toggle('raw_decompress');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="app-module.html#raw_decompress">raw_decompress</a><tt class="py-op">(</tt><tt class="py-param">compressed</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="raw_decompress-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="raw_decompress-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">    @summary: Decompress a list of output ks to a string.</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">    @param compressed: compressed data</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">    @type compressed: list</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">    @return: uncompressed data</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype: str</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-comment"># Build the dictionary.</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-name">dict_size</tt> <tt class="py-op">=</tt> <tt class="py-number">256</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-name">dictionary</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">chr</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">chr</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrange</tt><tt class="py-op">(</tt><tt class="py-name">dict_size</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">compressed</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">k</tt> <tt class="py-keyword">in</tt> <tt class="py-name">compressed</tt><tt class="py-op">:</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">k</tt> <tt class="py-keyword">in</tt> <tt class="py-name">dictionary</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">            <tt class="py-name">entry</tt> <tt class="py-op">=</tt> <tt class="py-name">dictionary</tt><tt class="py-op">[</tt><tt class="py-name">k</tt><tt class="py-op">]</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">k</tt> <tt class="py-op">==</tt> <tt class="py-name">dict_size</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">            <tt class="py-name">entry</tt> <tt class="py-op">=</tt> <tt class="py-name">w</tt> <tt class="py-op">+</tt> <tt class="py-name">w</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Bad compressed k: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">k</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">+=</tt> <tt class="py-name">entry</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-comment"># Add w+entry[0] to the dictionary.</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">dictionary</tt><tt class="py-op">[</tt><tt class="py-name">dict_size</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">w</tt> <tt class="py-op">+</tt> <tt class="py-name">entry</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">dict_size</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-name">entry</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+</div><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L83"></a><tt class="py-lineno"> 83</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="app-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-param">argv</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main-expanded"><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-docstring">"""Handle opt and argv"""</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-number">0</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;=</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt id="link-5" class="py-name" targets="Function app.usage()=app-module.html#usage"><a title="app.usage" class="py-name" href="#" onclick="return doclink('link-5', 'usage', 'link-5');">usage</a></tt><tt class="py-op">(</tt><tt class="py-string">"Nombre d'arguments"</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-keyword">global</tt> <tt id="link-6" class="py-name" targets="Variable app.VERBOSE=app-module.html#VERBOSE"><a title="app.VERBOSE" class="py-name" href="#" onclick="return doclink('link-6', 'VERBOSE', 'link-6');">VERBOSE</a></tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-name">chunk_size</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-name">operation</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-name">operation_args</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">opts</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-name">getopt</tt><tt class="py-op">(</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">            <tt class="py-name">argv</tt><tt class="py-op">,</tt> <tt class="py-string">"hc:d:v"</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">"help"</tt><tt class="py-op">,</tt> <tt class="py-string">"compress="</tt><tt class="py-op">,</tt> <tt class="py-string">"decompress="</tt><tt class="py-op">,</tt> <tt class="py-string">"verbose"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">GetoptError</tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt id="link-7" class="py-name"><a title="app.usage" class="py-name" href="#" onclick="return doclink('link-7', 'usage', 'link-5');">usage</a></tt><tt class="py-op">(</tt><tt class="py-string">"Erreur getopt"</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">opt</tt><tt class="py-op">,</tt> <tt class="py-name">arg</tt> <tt class="py-keyword">in</tt> <tt class="py-name">opts</tt><tt class="py-op">:</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">opt</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-string">'-h'</tt><tt class="py-op">,</tt> <tt class="py-string">'--help'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-name">operation</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="app.usage" class="py-name" href="#" onclick="return doclink('link-8', 'usage', 'link-5');">usage</a></tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">            <tt class="py-name">operation_args</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"Aide"</tt><tt class="py-op">]</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">opt</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-string">"-c"</tt><tt class="py-op">,</tt> <tt class="py-string">"--compress"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">arg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">IOError</tt><tt class="py-op">(</tt><tt class="py-string">"Erreur, %s n'est pas un fichier valide"</tt> <tt class="py-op">%</tt> <tt class="py-name">arg</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-name">operation</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name" targets="Function app.file_compress()=app-module.html#file_compress"><a title="app.file_compress" class="py-name" href="#" onclick="return doclink('link-9', 'file_compress', 'link-9');">file_compress</a></tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">            <tt class="py-name">operation_args</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">arg</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">opt</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-string">"-d"</tt><tt class="py-op">,</tt> <tt class="py-string">"--decompress"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">arg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">IOError</tt><tt class="py-op">(</tt><tt class="py-string">"Erreur, %s n'est pas un fichier valide"</tt> <tt class="py-op">%</tt> <tt class="py-name">arg</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">            <tt class="py-name">operation</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name" targets="Function app.file_decompress()=app-module.html#file_decompress"><a title="app.file_decompress" class="py-name" href="#" onclick="return doclink('link-10', 'file_decompress', 'link-10');">file_decompress</a></tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-name">operation_args</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">arg</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">opt</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-string">'-v'</tt><tt class="py-op">,</tt> <tt class="py-string">'--verbose'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">            <tt id="link-11" class="py-name"><a title="app.VERBOSE" class="py-name" href="#" onclick="return doclink('link-11', 'VERBOSE', 'link-6');">VERBOSE</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">            <tt id="link-12" class="py-name"><a title="app.usage" class="py-name" href="#" onclick="return doclink('link-12', 'usage', 'link-5');">usage</a></tt><tt class="py-op">(</tt><tt class="py-string">"Mauvais param&#232;tre : %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">opt</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt id="link-13" class="py-name"><a title="app.verboseprint" class="py-name" href="#" onclick="return doclink('link-13', 'verboseprint', 'link-1');">verboseprint</a></tt><tt class="py-op">(</tt><tt class="py-name">opts</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">operation_args</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-name">operation</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">operation_args</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-name">operation</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="verboseprint"></a><div id="verboseprint-def"><a name="L131"></a><tt class="py-lineno">131</tt> <a class="py-toggle" href="#" id="verboseprint-toggle" onclick="return toggle('verboseprint');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="app-module.html#verboseprint">verboseprint</a><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="verboseprint-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="verboseprint-expanded"><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-docstring">"""Print message if verbose is enabled, otherwise do nothing"""</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-14" class="py-name"><a title="app.VERBOSE" class="py-name" href="#" onclick="return doclink('link-14', 'VERBOSE', 'link-6');">VERBOSE</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">arg</tt> <tt class="py-keyword">in</tt> <tt class="py-name">args</tt><tt class="py-op">:</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-name">arg</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt>
+<a name="file_compress"></a><div id="file_compress-def"><a name="L140"></a><tt class="py-lineno">140</tt> <a class="py-toggle" href="#" id="file_compress-toggle" onclick="return toggle('file_compress');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="app-module.html#file_compress">file_compress</a><tt class="py-op">(</tt><tt class="py-param">filename_in</tt><tt class="py-op">,</tt> <tt class="py-param">filename_out</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="file_compress-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="file_compress-expanded"><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">    @param filename_in: File to compress</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">    @param filename_out: Future compressed file</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">    @summary: LZW File compression</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename_in</tt><tt class="py-op">,</tt> <tt class="py-string">'r'</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">file_in</tt><tt class="py-op">:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-name">raw_data</tt> <tt class="py-op">=</tt> <tt class="py-name">file_in</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-name">compressed_data</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name" targets="Function app.raw_compress()=app-module.html#raw_compress"><a title="app.raw_compress" class="py-name" href="#" onclick="return doclink('link-15', 'raw_compress', 'link-15');">raw_compress</a></tt><tt class="py-op">(</tt><tt class="py-name">raw_data</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename_out</tt><tt class="py-op">,</tt> <tt class="py-string">'wb'</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">f</tt><tt class="py-op">:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">            <tt id="link-16" class="py-name"><a title="binary" class="py-name" href="#" onclick="return doclink('link-16', 'binary', 'link-0');">binary</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Function binary.dump()=binary-module.html#dump"><a title="binary.dump" class="py-name" href="#" onclick="return doclink('link-17', 'dump', 'link-17');">dump</a></tt><tt class="py-op">(</tt><tt class="py-name">compressed_data</tt><tt class="py-op">,</tt> <tt class="py-name">f</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"> </tt>
+<a name="file_decompress"></a><div id="file_decompress-def"><a name="L153"></a><tt class="py-lineno">153</tt> <a class="py-toggle" href="#" id="file_decompress-toggle" onclick="return toggle('file_decompress');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="app-module.html#file_decompress">file_decompress</a><tt class="py-op">(</tt><tt class="py-param">filename_in</tt><tt class="py-op">,</tt> <tt class="py-param">filename_out</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="file_decompress-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="file_decompress-expanded"><a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">    @param filename_in: File to decompress</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">    @param filename_out: Future decompressed file</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">    @summary: LZW File decompression </tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename_out</tt><tt class="py-op">,</tt> <tt class="py-string">'w'</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">file_out</tt><tt class="py-op">:</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename_in</tt><tt class="py-op">,</tt> <tt class="py-string">'rb'</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">f</tt><tt class="py-op">:</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">            <tt class="py-name">compressed_data</tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="binary" class="py-name" href="#" onclick="return doclink('link-18', 'binary', 'link-0');">binary</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Function binary.load()=binary-module.html#load"><a title="binary.load" class="py-name" href="#" onclick="return doclink('link-19', 'load', 'link-19');">load</a></tt><tt class="py-op">(</tt><tt class="py-name">f</tt><tt class="py-op">)</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-name">raw_data</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name" targets="Function app.raw_decompress()=app-module.html#raw_decompress"><a title="app.raw_decompress" class="py-name" href="#" onclick="return doclink('link-20', 'raw_decompress', 'link-20');">raw_decompress</a></tt><tt class="py-op">(</tt><tt class="py-name">compressed_data</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-name">file_out</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">raw_data</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"> </tt>
+<a name="usage"></a><div id="usage-def"><a name="L166"></a><tt class="py-lineno">166</tt> <a class="py-toggle" href="#" id="usage-toggle" onclick="return toggle('usage');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="app-module.html#usage">usage</a><tt class="py-op">(</tt><tt class="py-param">msg</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="usage-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="usage-expanded"><a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">    @summary: Prints usage info</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">    @param msg: facultative message to print before usage info</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">    @type msg: str</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype: None</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">msg</tt><tt class="py-op">:</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-name">msg</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-string">"""Usage :</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-string">python app.py [OPTIONS] [FILE]</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-string">-c, --compress : File to compress</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-string">-d, --decompress : File to decompress</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-string">-h, --help : Print this message</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-string">-v, --verbose : Verbose mode</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-string">To launch unit tests = python tests.py</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-string">"""</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt id="link-21" class="py-name"><a title="app.VERBOSE" class="py-name" href="#" onclick="return doclink('link-21', 'VERBOSE', 'link-6');">VERBOSE</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">"__main__"</tt><tt class="py-op">:</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">    <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt id="link-22" class="py-name" targets="Function app.main()=app-module.html#main"><a title="app.main" class="py-name" href="#" onclick="return doclink('link-22', 'main', 'link-22');">main</a></tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >DESKTOP-FQI3R7C</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue May 30 22:12:56 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
