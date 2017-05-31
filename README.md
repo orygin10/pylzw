@@ -1,2 +1,2 @@
 # pylzw
-[](./docs/process.png)
+[](./docs/process$.png)
