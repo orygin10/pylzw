@@ -13,6 +13,7 @@ def raw_compress(uncompressed):
     @return: hybrid list, elements of type int or str
     @rtype: list
     @note: First element is encoding size in bits
+    @warn: xrange is python 2-only, use range for Python 3
     """
 
     # Build the dictionary.
@@ -51,7 +52,7 @@ def raw_compress(uncompressed):
 
 def raw_decompress(compressed):
     """
-    @summary: Decompress a list of output ks to a string.
+    @summary: Use LZW Algorithm to reverse compression
     @param compressed: compressed data
     @type compressed: list
     @return: uncompressed data
@@ -84,6 +85,7 @@ def file_compress(filename_in, filename_out):
     @param filename_in: File to compress
     @param filename_out: Future compressed file
     @summary: LZW File compression
+    @rtype: None
     """
     with open(filename_in, 'r') as file_in:
         raw_data = file_in.read()
@@ -96,7 +98,8 @@ def file_decompress(filename_in, filename_out):
     """
     @param filename_in: File to decompress
     @param filename_out: Future decompressed file
-    @summary: LZW File decompression 
+    @summary: LZW File decompression
+    @rtype: None
     """
     with open(filename_out, 'w') as file_out:
         with open(filename_in, 'rb') as f:
@@ -106,7 +109,11 @@ def file_decompress(filename_in, filename_out):
 
 
 def main(argv):
-    """Handle opt and argv"""
+    """
+    @summary: Execute operation based on command line argument
+    @param argv: Command line arguments
+    @rtype: None
+    """
     if not 0 < len(argv) <= 3:
         usage("Nombre d'arguments")
         sys.exit(2)
@@ -154,7 +161,12 @@ def main(argv):
 
 
 def verboseprint(*args):
-    """Print message if verbose is enabled, otherwise do nothing"""
+    """
+    @summary: Print message if verbose is enabled, otherwise do nothing
+    @param args: Message(s) to print
+    @type args: str or iter(str)
+    @rtype: None
+    """
     if not VERBOSE:
         return
     else:
@@ -171,7 +183,7 @@ def usage(msg=""):
     if msg:
         print msg
     print(
-        """Usage :
+"""Usage :
 python app.py [OPTIONS] [FILE]
 -c, --compress : File to compress
 -d, --decompress : File to decompress

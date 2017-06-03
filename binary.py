@@ -10,6 +10,8 @@ def write_seq(seq, hFile):
 	@type seq: list(int)
 	@param hFile: File handle (wb)
 	@note: All elements of seq must be ints
+	@warn: StringIO method is absent in Python 3
+	@rtype: None
 	"""
 	bitlen = seq.pop(0)				# Grab encoding size
 	if bitlen > 255:				# Encoding size must be converted to byte
@@ -40,6 +42,7 @@ def read_seq(hFile):
 	@param hFile: File handle(rb)
 	@return: Extracted sequence
 	@rtype: list(int)
+	@warn: StringIO Method is absent in Python 3
 	"""
 	bits = ''						# Sequence of bits
 
@@ -65,7 +68,9 @@ def dump(seq, hFile):
 	@summary: Higher level write_seq, converts all chars to ints
 	@param seq: Compressed sequence
 	@type seq: list(int~str)
-	@param hFile: File handle (wb)"""
+	@param hFile: File handle (wb)
+	@rtype: None
+	"""
 	seq = [ord(el) if isinstance(el, str) else el for el in seq]
 	write_seq(seq, hFile)
 
