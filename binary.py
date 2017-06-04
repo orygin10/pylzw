@@ -14,7 +14,7 @@ def write_seq(seq, hFile):
 	@rtype: None
 	"""
 	bitlen = seq.pop(0)				# Grab encoding size
-	if bitlen > 255:				# Encoding size must be converted to byte
+	if bitlen > 255:				# Encoding size must be encoded in 1 byte
 		raise ValueError("La taille du dictionnaire dépasse 2^255")
 
 	hFile.write(chr(bitlen))		# Write encoding size in header
