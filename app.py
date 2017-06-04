@@ -1,9 +1,11 @@
 # *-* coding: utf-8 *-*
 # @version: Python 2.7
+from getopt import getopt, GetoptError
+from timeit import default_timer as timer
 import sys
 import os
-from getopt import getopt, GetoptError
-import binary
+import binary # My module
+
 
 def raw_compress(uncompressed):
     """
@@ -16,6 +18,9 @@ def raw_compress(uncompressed):
     @warn: xrange is python 2-only, use range for Python 3
     """
 
+    # Prologue 
+    verboseprint("Compression starting.")
+    top = timer()
     # Build the dictionary.
     dict_size = 256
     dictionary = dict((chr(i), chr(i)) for i in xrange(dict_size))
@@ -23,7 +28,7 @@ def raw_compress(uncompressed):
     w = ""
     result = []
 
-    verboseprint("%d uncompressed chars" % len(uncompressed))
+    # Body
     for c in uncompressed:
         wc = w + c
         if wc in dictionary:
@@ -38,15 +43,26 @@ def raw_compress(uncompressed):
     # Output the code for w.
     if w:
         result.append(dictionary[w])
-
+    
     # Epilogue
-    verboseprint("%d compressed elements" % len(result))
-    ints = [el for el in result if isinstance(el, int)]
-    verboseprint("Taille max : %d" % max(ints))
+    end = timer()
+    duration = end-top
+    verboseprint("Compression completed in %.2f seconds" % duration)
+    if duration < 0.01:
+        verboseprint("Try with a bigger file like [tests/bible.txt] for a more comprehensive duration")
 
-    bitlen = len(bin(max(ints))[2:])
-    verboseprint("Encoding size = %d bits" % bitlen)
-    result.insert(0, bitlen)
+    ints = [el for el in result if isinstance(el, int)] # Extract ints from result
+    bitlen = len(bin(max(ints))[2:]) # Number of bits needed to encode highest dictionary entry
+    result.insert(0, bitlen) # First element of result is bitlen
+
+    verboseprint("\n<<< Compression data >>>")
+    verboseprint("Algorithm efficiency :")
+    verboseprint("\t%d chars (bytes) to compress" % len(uncompressed))
+    verboseprint("\t%d compressed elements" % len(result))
+    verboseprint("\nMetrics for binary encoding :")
+    verboseprint("\tHighest value in dictionary : %d" % max(ints))
+    verboseprint("\tEncoding size : %d bits" % bitlen)
+
     return result
 
 
@@ -59,10 +75,14 @@ def raw_decompress(compressed):
     @rtype: str
     """
 
+    # Prologue
+    verboseprint("Decompression starting")
+    top = timer()
     # Build the dictionary.
     dict_size = 256
     dictionary = dict((chr(i), chr(i)) for i in xrange(dict_size))
 
+    # Body
     w = result = compressed.pop(0)
     for k in compressed:
         if k in dictionary:
@@ -78,7 +98,34 @@ def raw_decompress(compressed):
         dict_size += 1
 
         w = entry
+
+    # Epilogue
+    end = timer()
+    duration = end-top
+    verboseprint("Decompression completed in %.2f seconds" % duration)
     return result
+
+def ratios(plaintext, compressed):
+    """
+    @param plaintext: Uncompressed file name
+    @param compressed: Compressed file name
+    @summary: Print both compression ratio definition
+    """
+    verboseprint("\n<<< Compression results >>>")
+    size_pt = os.stat(plaintext).st_size
+    size_c = os.stat(compressed).st_size
+
+    verboseprint("Size :")
+    verboseprint("\t%s : %d B\n\t%s : %d B" % 
+        (plaintext, size_pt, compressed, size_c)
+    )
+
+    ratioA = float(size_pt) / float(size_c)     # Compression ratio : uncompressed size / compressed size
+    ratioB = 1-(float(size_c) / float(size_pt)) # Space savings : 1 - (compressed size / uncompressed size)
+
+    verboseprint("Ratios :")
+    verboseprint("\tCompression ratio : %.2f:1" % ratioA )
+    verboseprint("\tSpace savings : %d%%" % int(ratioB*100) )
 
 def file_compress(filename_in, filename_out):
     """
@@ -93,6 +140,8 @@ def file_compress(filename_in, filename_out):
         with open(filename_out, 'wb') as f:
             binary.dump(compressed_data, f)
 
+    ratios(filename_in, filename_out)
+
 
 def file_decompress(filename_in, filename_out):
     """
@@ -101,12 +150,12 @@ def file_decompress(filename_in, filename_out):
     @summary: LZW File decompression
     @rtype: None
     """
+    with open(filename_in, 'rb') as f:
+        compressed_data = binary.load(f)
+
     with open(filename_out, 'w') as file_out:
-        with open(filename_in, 'rb') as f:
-            compressed_data = binary.load(f)
         raw_data = raw_decompress(compressed_data)
         file_out.write(raw_data)
-
 
 def main(argv):
     """
@@ -116,7 +165,7 @@ def main(argv):
     """
     if not 0 < len(argv) <= 3:
         usage("Nombre d'arguments")
-        sys.exit(2)
+        return 2
 
     global VERBOSE
     chunk_size = 0
@@ -153,12 +202,13 @@ def main(argv):
         else:
             usage("Mauvais paramètre : %s" % opt)
 
-    verboseprint(opts)
+    verboseprint("Args : {}".format(argv))
     if operation_args:
         operation(*operation_args)
     else:
         operation()
 
+    return 0
 
 def verboseprint(*args):
     """
@@ -196,4 +246,5 @@ To launch unit tests = python tests.py
 
 VERBOSE = False
 if __name__ == "__main__":
+    # Exit with main() return value
     sys.exit(main(sys.argv[1:]))
